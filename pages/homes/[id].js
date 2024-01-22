@@ -5,7 +5,7 @@ import db from "../../data/db.json"
 export default function SinglePageDetialsPage() {
   const route = useRouter();
   const detailesHome = db.homes.find(home => home.id == route.query.id);
-  console.log(detailesHome);
+  
   return (
     <div className="home-details">
       <div className="home-details-top">

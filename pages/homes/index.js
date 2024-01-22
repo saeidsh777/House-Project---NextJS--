@@ -4,22 +4,47 @@ import db from "../../data/db.json";
 
 export default function index() {
   const [searchValue, setSearchValue] = useState("");
-  const [searchHome, setSearchHome] = useState([...db.homes]);
+  const [sort, setSort] = useState("-1");
+  const [homes, setHomes] = useState([...db.homes]);
 
   useEffect(() => {
-    setSearchHome(db.homes.filter((home) => home.title.includes(searchValue)));
+    setHomes(db.homes.filter((home) => home.title.includes(searchValue)));
   }, [searchValue]);
+
+  useEffect(() => {
+    switch (sort) {
+      case "price": {
+        const newHomes = [...homes].sort((a, b) => a.price - b.price);
+        setHomes(newHomes);
+        break;
+      }
+      case "room": {
+        const newHomes = [...homes].sort((a, b) => a.roomCount - b.roomCount);
+        setHomes(newHomes);
+        break;
+      }
+      case "metrage": {
+        const newHomes = [...homes].sort((a, b) => a.meterage - b.meterage);
+        setHomes(newHomes);
+        break;
+      }
+
+      default: {
+        setHomes([...db.homes]);
+        break;
+      }
+    }
+  }, [sort]);
 
   return (
     <div className="home-section" id="houses">
       <div className="home-filter-search">
         <div className="home-filter">
-          <select name="" id="" defaultValue="-1">
+          <select defaultValue={sort} onChange={(e) => setSort(e.target.value)}>
             <option value="-1">انتخاب کنید</option>
-            <option value="1">بر اساس قیمت</option>
-            <option value="2">بر اساس تعداد اتاق</option>
-            <option value="3">بر اساس ادرس</option>
-            <option value="4">بر اساس اندازه</option>
+            <option value="price">بر اساس قیمت</option>
+            <option value="room">بر اساس تعداد اتاق</option>
+            <option value="metrage">بر اساس اندازه</option>
           </select>
         </div>
         <div className="home-search">
@@ -32,15 +57,15 @@ export default function index() {
         </div>
       </div>
       <div className="homes">
-        {searchHome.length ? (
-          searchHome.map((home) => <HomeCard key={home.id} {...home} />)
+        {homes.length ? (
+          homes.map((home) => <HomeCard key={home.id} {...home} />)
         ) : (
           <h1>ملکی یافت نشد ...</h1>
         )}
       </div>
       <ul
         className={
-          searchHome.length ? "pagination__list" : "pagination__list d-none"
+          homes.length ? "pagination__list" : "pagination__list d-none"
         }
       >
         <li className="pagination__item">

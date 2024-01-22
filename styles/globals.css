@@ -116,6 +116,8 @@ body {
 }
 
 .homes {
+  grid-column: center-start / center-end;
+  margin: 15rem 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
   grid-gap: 3rem;
@@ -441,7 +443,7 @@ body {
 .featur__icon {
   width: 4.5rem;
   height: 4.5rem;
-  fill: var(--color-primary);
+  color: var(--color-primary);
   grid-row: 1 / span 2;
   transform: translateY(-1.5rem);
 }

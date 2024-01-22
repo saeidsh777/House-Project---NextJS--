@@ -1,11 +1,19 @@
 import React from "react";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBarChart,
+  faGlobe, faKey, faLock, faMapMarked, faMapMarker, faTrophy,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Features() {
   return (
     <div className="featurs">
       <div className="featur">
         <svg className="featur__icon">
-          {/* <use xlink:href="img/sprite.svg#icon-global"></use> */}
+          <FontAwesomeIcon icon={faGlobe} />
         </svg>
         <h4 className="u-heading--dark">بهترین خانه های لوکس جهان</h4>
         <p className="u-paragraph">
@@ -17,7 +25,7 @@ export default function Features() {
 
       <div className="featur">
         <svg className="featur__icon">
-          {/* <use xlink:href="img/sprite.svg#icon-map-pin"></use> */}
+          <FontAwesomeIcon icon={faMapMarker} />
         </svg>
         <h4 className="u-heading--dark">همه خانه ها در مکان های برتر</h4>
         <p className="u-paragraph">
@@ -27,7 +35,7 @@ export default function Features() {
       </div>
       <div className="featur">
         <svg className="featur__icon">
-          {/* <use xlink:href="img/sprite.svg#icon-key"></use> */}
+          <FontAwesomeIcon icon={faKey} />
         </svg>
         <h4 className="u-heading--dark">خانه جدید در یک هفته</h4>
         <p className="u-paragraph">
@@ -38,7 +46,7 @@ export default function Features() {
       </div>
       <div className="featur">
         <svg className="featur__icon">
-          {/* <use xlink:href="img/sprite.svg#icon-presentation"></use> */}
+          <FontAwesomeIcon icon={faBarChart} />
         </svg>
         <h4 className="u-heading--dark">فقط بهترین خواص</h4>
         <p className="u-paragraph">
@@ -49,7 +57,7 @@ export default function Features() {
       </div>
       <div className="featur">
         <svg className="featur__icon">
-          {/* <use xlink:href="img/sprite.svg#icon-lock"></use> */}
+          <FontAwesomeIcon icon={faLock} />
         </svg>
         <h4 className="u-heading--dark">پرداخت های ایمن در بعدی</h4>
         <p className="u-paragraph">
@@ -60,7 +68,7 @@ export default function Features() {
       </div>
       <div className="featur">
         <svg className="featur__icon">
-          {/* <use xlink:href="img/sprite.svg#icon-trophy"></use> */}
+          <FontAwesomeIcon icon={faTrophy} />
         </svg>
         <h4 className="u-heading--dark">1% مشاوران املاک برتر</h4>
         <p className="u-paragraph">
