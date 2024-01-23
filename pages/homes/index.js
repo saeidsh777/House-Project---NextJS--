@@ -1,14 +1,17 @@
 import HomeCard from "@/Components/modules/HomeCard";
 import React, { useEffect, useState } from "react";
 import db from "../../data/db.json";
+import Link from "next/link";
 
 export default function index() {
   const [searchValue, setSearchValue] = useState("");
   const [sort, setSort] = useState("-1");
   const [homes, setHomes] = useState([...db.homes]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     setHomes(db.homes.filter((home) => home.title.includes(searchValue)));
+    
   }, [searchValue]);
 
   useEffect(() => {
@@ -36,6 +39,15 @@ export default function index() {
     }
   }, [sort]);
 
+  const paginationHandler = (e, pageNum) => {
+    e.preventDefault();
+    setPage(pageNum);
+    let endIndex = 3 * pageNum
+    let startIndex = endIndex - 3
+    let paginated = [...db.homes].slice(startIndex, endIndex)
+    setHomes(paginated)
+  };
+
   return (
     <div className="home-section" id="houses">
       <div className="home-filter-search">
@@ -58,7 +70,7 @@ export default function index() {
       </div>
       <div className="homes">
         {homes.length ? (
-          homes.map((home) => <HomeCard key={home.id} {...home} />)
+          homes.slice(0, 3).map((home) => <HomeCard key={home.id} {...home} />)
         ) : (
           <h1>ملکی یافت نشد ...</h1>
         )}
@@ -73,16 +85,25 @@ export default function index() {
             {" <<"}
           </a>
         </li>
-        <li className="pagination__item">
-          <a href="#" className="">
-            2
-          </a>
-        </li>
-        <li className="pagination__item active">
-          <a href="#" className="">
-            1
-          </a>
-        </li>
+        {Array.from({ length: Math.ceil(db.homes.length / 3) }).map(
+          (item, index) => (
+            <li
+              key={index + 1}
+              className={`${
+                page == index + 1
+                  ? "pagination__item active"
+                  : "pagination__item"
+              }`}
+              onClick={(e) => paginationHandler(e, index + 1)}
+            >
+              <a
+                href="#"
+              >
+                {index + 1}
+              </a>
+            </li>
+          )
+        )}
       </ul>
     </div>
   );
