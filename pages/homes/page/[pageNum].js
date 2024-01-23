@@ -1,17 +1,19 @@
 import HomeCard from "@/Components/modules/HomeCard";
 import React, { useEffect, useState } from "react";
-import db from "../../data/db.json";
+import db from "../../../data/db.json";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default function index() {
+export default function pageNum() {
+  const route = useRouter()
   const [searchValue, setSearchValue] = useState("");
   const [sort, setSort] = useState("-1");
   const [homes, setHomes] = useState([...db.homes]);
   const [page, setPage] = useState(1);
+  console.log(route.query.pageNum);
 
   useEffect(() => {
     setHomes(db.homes.filter((home) => home.title.includes(searchValue)));
-    
   }, [searchValue]);
 
   useEffect(() => {
@@ -40,12 +42,11 @@ export default function index() {
   }, [sort]);
 
   const paginationHandler = (e, pageNum) => {
-    e.preventDefault();
     setPage(pageNum);
-    let endIndex = 3 * pageNum
-    let startIndex = endIndex - 3
-    let paginated = [...db.homes].slice(startIndex, endIndex)
-    setHomes(paginated)
+    let endIndex = 3 * pageNum;
+    let startIndex = endIndex - 3;
+    let paginated = [...db.homes].slice(startIndex, endIndex);
+    setHomes(paginated);
   };
 
   return (
@@ -87,7 +88,8 @@ export default function index() {
         </li>
         {Array.from({ length: Math.ceil(db.homes.length / 3) }).map(
           (item, index) => (
-            <li
+            <Link
+            href={`/homes/page/${index + 1}`}
               key={index + 1}
               className={`${
                 page == index + 1
@@ -96,12 +98,8 @@ export default function index() {
               }`}
               onClick={(e) => paginationHandler(e, index + 1)}
             >
-              <a
-                href="#"
-              >
-                {index + 1}
-              </a>
-            </li>
+              <span href="#">{index + 1}</span>
+            </Link>
           )
         )}
       </ul>

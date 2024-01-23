@@ -51,7 +51,7 @@ export default function App({ Component, pageProps }) {
         <img src="/img/logo.png" alt="Nexter Logo" className="header__logo" />
         <h3 className="u-heading-3 u-heading--light">خانه خودتان:</h3>
         <h1 className="u-heading-1">با خرید خانه نهایت آزادی را احساس کنید</h1>
-        <Link href='/homes' className="btn header__btn btn-brown">
+        <Link href='/homes/page/1' className="btn header__btn btn-brown">
           املاک ما را مشاهده کنید
         </Link>
 

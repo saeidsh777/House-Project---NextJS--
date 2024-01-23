@@ -399,6 +399,7 @@ body {
 }
 
 .pagination__item {
+  text-decoration: none;
   width: 4rem;
   height: 4rem;
   background-color: var(--color-primary);
@@ -410,8 +411,7 @@ body {
   transition: all 0.5s;
 }
 
-.pagination__item a {
-  text-decoration: none;
+.pagination__item span {
   color: var(--color-gray-light-1);
 }
 .pagination__item:hover,
